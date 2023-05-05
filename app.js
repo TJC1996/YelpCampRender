@@ -6,8 +6,8 @@ if(process.env.NODE_ENV !== "production") {
 
 
 
-console.log(process.env.SECRET)
-console.log(process.env.API_KEY)
+// console.log(process.env.SECRET)
+// console.log(process.env.API_KEY)
 
 const express = require('express');
 const path = require('path');
@@ -224,9 +224,9 @@ app.use((err, req, res, next) => {
     // res.send("OH Boy something went wrong")
 })
 
-
-app.listen(3000, () => {
-    console.log('Serving on port 8080')
+const port = process.env.PORT || 3000;
+app.listen(80, () => {
+    console.log(`Serving on port ${port}`)
 })
 
 
