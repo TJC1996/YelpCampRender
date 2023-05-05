@@ -1,0 +1,105 @@
+<%- layout('layouts/boilerplate') %>
+    <div class="row">
+        <style>
+            .file-input-wrapper {
+                position: relative;
+            }
+
+            .file-input-wrapper input[type="file"] {
+                opacity: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+        <h1 class="text-center">Edit Campground Form</h1>
+        <div class="col-md-6 offset-md-3 mb-3">
+            <form class="needs-validation" action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST"
+                enctype="multipart/form-data" novalidate>
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="campground[title]"
+                        value="<%=campground.title %>" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" name="campground[location]"
+                        value="<%=campground.location %>" required>
+                </div>
+
+
+                <!-- <div class="mb-3">
+                    <label class="form-label" for="image">Add Images</label>
+                    <input class="form-control form-control-sm" type="file" id="image" name="image"
+                         multiple>
+                </div> -->
+                <div class="mb-3">
+                    <label class="form-label" for="price">Campground Price:</label>
+                    <div class="input-group">
+                        <div class="input-group-text" id="input-label">$</div>
+                        <input type="text" class="form-control" id="price" name="campground[price]" placeholder="0.00"
+                            aria-describedby="input-label" value="<%=campground.price %>" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="image">Add Images</label>
+                    <div class="file-input-wrapper">
+                        <button type="button" class="btn btn-primary">Choose Images</button>
+                        <input class="form-control form-control-sm" type="file" value="<%=campground.image %>"
+                            id="image" name="image" multiple>
+                        <span class="ms-2" id="image-label">No image(s) chosen</span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" type="text" id="description" name="campground[description]"
+                        required><%=campground.description%></textarea>
+                </div>
+
+                <div class="col-auto mb-3">
+                    <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Twitter Handle">
+                    </div>
+                </div>
+
+
+                <div class="mb-3">
+                    <% campground.images.forEach(function(img, i) { %>
+                        <img crossorigin="anonymous" src="<%=img.thumbnail %>" class="img-thumbnail">
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                </div>
+                        <label for="image-<%=i%>">Delete</label>
+                    <% }) %>
+
+            </div>
+            <button class="btn btn-info">Add Campground</button>
+            </form>
+
+            <a href="/campgrounds">Back</a>
+        </div>
+
+    </div>
+
+
+    <script>
+        const fileInput = document.getElementById('image');
+        const fileLabel = document.getElementById('image-label');
+
+        fileInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            if (files.length === 0) {
+                fileLabel.textContent = 'No image(s) chosen';
+            } else if (files.length === 1) {
+                fileLabel.textContent = files[0].name;
+            } else {
+                fileLabel.textContent = `${files.length} images chosen`;
+            }
+        });
+    </script>
