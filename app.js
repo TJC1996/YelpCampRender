@@ -112,7 +112,7 @@ const sessionConfig = {
     name: 'campground',
     secret,
     resave: false,
-    saveUnitialized: true,
+    saveUninitialized: true,
     cookie: {
         httpOnly: true,
         // secure: true,
