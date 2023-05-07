@@ -15,11 +15,11 @@
             <%     if(campground.images.length)  {%>
             <img crossorigin="anonymous" class="d-block w-100 h-100" alt="" src="<%=campground.images[0].url%>">
             <% } else {%>
-                <img crossorigin="anonymous" class="img-fluid h-100" alt="" src="https://res.cloudinary.com/dbgjcmynd/image/upload/v1683177806/YelpCamp/mobmq5hr2ydsrezo4zbn.jpg">
+                <img crossorigin="anonymous" class="d-block w-100 h-100" alt="" src="https://res.cloudinary.com/dbgjcmynd/image/upload/v1683177806/YelpCamp/mobmq5hr2ydsrezo4zbn.jpg">
 
                 <% } %>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 d-flex align-items-center">
             <div class="card-body text-center">
                 <h5 class="card-title"><%= campground.title %> </h5>
                 <p class="card-text"><%= campground.description %></p>
